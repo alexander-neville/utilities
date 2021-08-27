@@ -51,24 +51,18 @@ options:
 	@echo CC $<
 	@${CC} -c ${CFLAGS} $<
 
-${OBJ}: config.h
-
-config.h:
-	@echo creating $@ from config.def.h
-	@cp config.def.h $@
-
 .o:
 	@echo CC -o $@
 	@${CC} -o $@ $< ${LDFLAGS}
 
 clean:
 	@echo cleaning
-	@rm -f ${BIN} ${OBJ} tabbed-${VERSION}.tar.gz config.h
+	@rm -f ${BIN} ${OBJ} tabbed-${VERSION}.tar.gz
 
 dist: clean
 	@echo creating dist tarball
 	@mkdir -p tabbed-${VERSION}
-	@cp -R LICENSE Makefile README config.def.h \
+	@cp -R LICENSE Makefile README \
 		tabbed.1 arg.h ${SRC} tabbed-${VERSION}
 	@tar -cf tabbed-${VERSION}.tar tabbed-${VERSION}
 	@gzip tabbed-${VERSION}.tar
